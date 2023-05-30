@@ -108,7 +108,7 @@
 	<key>createdby</key>
 	<string>Yinan Chen</string>
 	<key>description</key>
-	<string></string>
+	<string>Search homebrew formula and casks</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -204,7 +204,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>Please Wait ...</string>
 				<key>script</key>
 				<string>export PYTHONPATH='./libs/'
 
@@ -214,9 +214,9 @@ python3 brewinfo.py "all_cask"</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>Show all casks</string>
 				<key>title</key>
-				<string></string>
+				<string>Cask</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -276,7 +276,7 @@ python3 brewinfo.py "all_cask"</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>Please Wait ...</string>
 				<key>script</key>
 				<string>export PYTHONPATH='./libs/'
 
@@ -286,9 +286,9 @@ python3 brewinfo.py "all_formula"</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>Show all formula</string>
 				<key>title</key>
-				<string></string>
+				<string>brew</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -579,7 +579,18 @@ python3 brewinfo.py "get_commands" "cask" "{query}"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># Alfred Homebrew
+An Alfred workflow to search for homebrew packages.
+
+## Requirments
+Python3, [Alfred PowerPack](https://www.alfredapp.com/powerpack/), [homebrew](https://brew.sh/)
+
+## Usage
+
+- Type `brew` to show and search for formulas, `cask` to show and search for casks
+- Select any items and press `return` to visit the brew.sh information page. `command + return` to visit homepage.
+- Continue to type full name or tab-complete the selected items (if enabled in Alfred) to show details
+- Press return on url entries to open urls, on commands to run then in terminal. Quicklook urls (by default `command + Y`) are also supported.</string>
 	<key>uidata</key>
 	<dict>
 		<key>05E1BAEC-0CF2-4820-A1CA-EEFF3F77CA15</key>
@@ -683,6 +694,8 @@ python3 brewinfo.py "get_commands" "cask" "{query}"</string>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
+	<key>version</key>
+	<string>1.0</string>
 	<key>webaddress</key>
 	<string>github.com/yinan-c/alfred-homebrew</string>
 </dict>

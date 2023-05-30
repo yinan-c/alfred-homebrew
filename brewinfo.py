@@ -1,36 +1,14 @@
 import requests
 import json
 import sys
-import re
 
-# According to https://docs.brew.sh/Cask-Cookbook#converting-the-simplified-name-to-a-token
-def caskname_to_token(name):
-    # Convert to lowercase
-    token = name.lower()
-
-    # Replace symbols with words
-    token = token.replace('+', '-plus-').replace('@', '-at-')
-
-    # Replace spaces, underscores, middots/interpuncts with hyphens
-    token = token.replace(' ', '-').replace('_', '-').replace('·', '-')
-
-    # Delete any character which is not alphanumeric or a hyphen
-    token = re.sub('[^a-z0-9-]', '', token)
-
-    # Collapse a series of multiple hyphens into one hyphen
-    token = re.sub('-+', '-', token)
-
-    # Delete a leading or trailing hyphen
-    token = re.sub('^-|-$', '', token)
-
-    return token
-
-    
 def get_all_formula_names():
     if sys.argv[1] == 'all_cask':
         response = requests.get('https://formulae.brew.sh/api/cask.json')
+        icon_path = {"path": "icons/cask.png"}
     elif sys.argv[1] == 'all_formula':
         response = requests.get('https://formulae.brew.sh/api/formula.json')
+        icon_path = {"path": "icons/brew.png"}
     data = response.json()
 
     items = []
@@ -39,7 +17,7 @@ def get_all_formula_names():
             name = item['name'][0]
             token = item['token']
             try:
-                subtitle = name + '\t' + 'ℹ️'+ item['desc']
+                subtitle = name + '  ℹ️ '+ item['desc']
             except:
                 subtitle = name
             arg = f'https://formulae.brew.sh/cask/{token}#default'
@@ -52,9 +30,7 @@ def get_all_formula_names():
             "title": token,
             "subtitle": subtitle,
             "arg": arg,
-            "icon": {
-                "path": "icon.png"
-            },
+            "icon": icon_path,
             "autocomplete": token,
             "mods": {
                 "cmd": {
@@ -74,12 +50,17 @@ def get_all_formula_names():
 def get_info(formula_name):
     token = formula_name.lower()
     if sys.argv[2] == 'cask':
-        #token = caskname_to_token(formula_name)
         response = requests.get('https://formulae.brew.sh/api/cask/'+token+'.json')
     elif sys.argv[2] == 'formula':
         response = requests.get('https://formulae.brew.sh/api/formula/'+token+'.json')
     data = response.json()
-
+    if sys.argv[2] == 'cask':
+        version = data['version']
+    elif sys.argv[2] == 'formula':
+        if data['versions']['bottle'] == True:
+            version = data['versions']['stable'] + ' (bottle)'
+        else:  
+            version = data['versions']['stable']
     output_data = {
         "items": [
             {
@@ -87,22 +68,28 @@ def get_info(formula_name):
                 "title": data['homepage'],
                 "subtitle": "Open homepage",
                 "arg": data['homepage'],
+                "icon": {"path": "icons/homepage.png"},
             },
             {
                 "valid": False,
                 "title": f"30 Days:\t{data['analytics']['install']['30d'][token]}",
-                "icon": {"path": "install.png"},
+                "icon": {"path": "icons/hot.png"},
             },
             {
                 "valid": False,
                 "title": f"90 Days:\t{data['analytics']['install']['90d'][token]}",
-                "icon": {"path": "install.png"},
+                "icon": {"path": "icons/hot.png"},
             },
             {
                 "valid": False,
                 "title": f"365 Days:\t{data['analytics']['install']['365d'][token]}",
-                "icon": {"path": "install.png"},
-            }   
+                "icon": {"path": "icons/hot.png"},
+            },
+            {
+                "valid": False,
+                "title": version,
+                "icon": {"path": "icons/uninstalled.png"},
+            }
         ]
     }
     return output_data
@@ -129,12 +116,14 @@ def get_commands(formula_name):
                 "title": install_command,
                 "subtitle": "Run install command of "+ name,
                 "arg": install_command,
+                "icon": {"path": "icons/install.png"},
             },
             {
                 "valid": True,
                 "title": info_command,
                 "subtitle": "Run info command of "+ name,
                 "arg": info_command,
+                "icon": {"path": "icons/info.png"},
             },
         ]
     }
