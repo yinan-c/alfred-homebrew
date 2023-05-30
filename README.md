@@ -1,12 +1,13 @@
 # Alfred-homebrew
-A alfred workflow for homebrew (with much more details)
+An Alfred workflow to search for homebrew packages.
+
+## Requirments
+Python3, Alfred PowerPack
 
 ## Usage
-`brew` for searching formula, `cask` for searching casks, type full name (or tab-complete for selected items) to show details (Analytics, urls, commands ...)
+- Type `brew` to show and search for formulas, `cask` to show and search for casks
+- Select any items and press return to visit the brew.sh information page. command + return to visit package homepage.
+- Continue to type full name or tab-complete the selected items (if enabled in Alfred) to show details of the selected package (Analytics, urls, usedul terminal commands ...)
 ![](https://i.imgur.com/LN4fTOa.png)
 ![](https://i.imgur.com/UdkGKbF.png)
-
-## TODO
-- Show installed list
-- In detail page, show installed information and uninstall commands for installed packages.
-- Update and upgrade commands.
+- Press return on url entries to open urls, on commands to run then in terminal. Quicklook urls are also supported will be supported. 
