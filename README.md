@@ -1,5 +1,5 @@
 # Easy Homebrew
-An Alfred workflow to make homebrew right on Alfred -- search, get details and run commands.
+An Alfred workflow to make homebrew right on Alfred -- Search, get details and run commands.
 
 ## Requirments
 - Required: Python3, [Alfred PowerPack](https://www.alfredapp.com/powerpack/)
@@ -19,7 +19,6 @@ An Alfred workflow to make homebrew right on Alfred -- search, get details and r
 
 ![](https://i.imgur.com/DqVLWzu.png)
 
-
 - In the dropdown list, select any items and press `enter` to see more details and applicable commands, commands include install, uninstall, upgrade, show info ... Commands will depend on install status.
 
 ![](https://i.imgur.com/30rtVus.png)
@@ -27,14 +26,13 @@ An Alfred workflow to make homebrew right on Alfred -- search, get details and r
 - View lists of homebrew leaves, installed formulae and casks, and outdated ones by typing keywords `leaves`, `list` and `outdated`.
   - I also added the default search_keyword `brew` to show installed and outdated lists, so that you can see whether a package is installed, or outdated. 
   - In the outdated list, you can update one-by-one or all-at-once with a simple `enter`.
-  - In `leaves` and `list`, tab-complete to view info and `enter` to view/run commands are also available.
+  - In `leaves` and `list`, tab-complete to view info and `enter` to view/run commands as you do with default `brew` search.
   - In `leaves`, quicklook is also available.
 
 ![](https://i.imgur.com/tMsw96l.png)
 ![](https://i.imgur.com/NaYjGaw.png)
 
-
-**PS:** In the scripts, every function returns results based on `brewtype` (either `cask` or `formula`), you can modify you own keywords and function arguments to make this workflow to the best your needs.
+**PS:** In the scripts, every function returns results based on `brewtype` (either `cask` or `formula`), you can modify keywords and function arguments to make this workflow to the best your needs.
 
 ## Thanks
 - Icon from [Bukeicon](https://www.flaticon.com/authors/bukeicon), [Freepik](https://www.flaticon.com/authors/freepik) on [flaticon.com](https://www.flaticon.com)
