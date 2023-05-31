@@ -24,7 +24,7 @@ An Alfred workflow to make homebrew right on Alfred -- search, get details and r
 
 ![](https://i.imgur.com/30rtVus.png)
 
-- View lists of [homebrew leaves](https://formulae.brew.sh/formula/leaf), installed formulae and casks, and outdated ones by type keywords `leaves`, `list` and `outdated`.
+- View lists of homebrew leaves, installed formulae and casks, and outdated ones by type keywords `leaves`, `list` and `outdated`.
   - I also added default search_keyword `brew` to show installed and outdated lists, so that you can see whether a package is installed, or outdated. 
   - In outdated list, you can update one-by-one or all-at-once with a simple `enter`.
   - In `leaves` and `list`, tab-complete to view info and `enter` to view/run commands are also available.

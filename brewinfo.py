@@ -1,137 +1,207 @@
 import requests
 import json
 import sys
+import subprocess
 
-def get_all_formula_names():
-    if sys.argv[1] == 'all_cask':
+def get_outdated_list(brewtype='all'):
+    if brewtype == 'cask':
+        output = subprocess.run(['brew', 'outdated', '--cask', '--json'], capture_output=True, text=True)
+    elif brewtype == 'formula':
+        output = subprocess.run(['brew', 'outdated', '--json'], capture_output=True, text=True)
+    else:
+        output = subprocess.run(['brew', 'outdated', '--json'], capture_output=True, text=True)
+
+    outdated_list = json.loads(output.stdout)
+    result = {"items": []}
+    if 'formulae' in outdated_list:
+        for package in outdated_list['formulae']:
+            name = package['name']
+            installed_version = package['installed_versions'][0]
+            current_version = package['current_version']
+
+            result["items"].append({
+                "title": f'{name} ({installed_version}) < {current_version}',
+                "subtitle": f'Enter to run "brew upgrade {name}"',
+                "icon": {
+                    "path": "icons/formula_outdated.png" 
+                },
+                "arg": 'brew upgrade ' + name,
+                "autocomplete": name,
+                "quicklookurl": f'https://formulae.brew.sh/formula/{name}#default'
+            })
+
+    if 'casks' in outdated_list:
+        for package in outdated_list['casks']:
+            name = package['name']
+            installed_version = package['installed_versions'][0]
+            current_version = package['current_version']
+
+            result["items"].append({
+                "title": f'{name} ({installed_version}) < {current_version}',
+                "subtitle": f'Enter to run "brew upgrade --cask {name}"',
+                "icon": {
+                    "path": "icons/cask_outdated.png" 
+                },
+                "arg": 'brew upgrade --cask ' + name,
+                "autocomplete": name,
+                "quicklookurl": f'https://formulae.brew.sh/cask/{name}#default'
+            })
+    if not result["items"]:
+        result["items"].append({
+            "title": "Everything is up to date",
+            "icon": {
+                "path": "icons/check.png"
+            },
+            "valid": False
+        })
+    else:
+        result["items"].append({
+            "title": "Upgrade all",
+            "icon": {
+                "path": "icons/update_all.png"
+            },
+            "arg": "brew update && brew upgrade",
+            "autocomplete": "Upgrade all",
+            "valid": True
+        })
+    return result
+
+def get_brew_leaves():
+    output = subprocess.run(['brew', 'leaves'], capture_output=True, text=True)
+    lines = output.stdout.split('\n')
+    result = {"items": []}
+    for line in lines:
+        if not line:
+            continue
+        result["items"].append({
+            "title": line,
+            "icon": {
+                "path": "icons/leaves.png"
+            },
+            "arg": line,
+            "autocomplete": line,
+            "quicklookurl": f'https://formulae.brew.sh/formula/{line}#default'
+        })
+    return result
+
+def get_brew_list(brewtype='all'):
+    if brewtype == 'cask':
+        output = subprocess.run(['brew', 'list', '--versions', '--cask'], capture_output=True, text=True)
+    elif brewtype == 'formula':
+        output = subprocess.run(['brew', 'list', '--versions', '--formula'], capture_output=True, text=True)
+    else:
+        output = subprocess.run(['brew', 'list', '--versions'], capture_output=True, text=True)
+    lines = output.stdout.split('\n')
+    result = {"items": []}
+    for line in lines:
+        if not line:
+            continue
+        name, version = line.split(' ', 1)
+
+        result["items"].append({
+            "title": f'{name} - {version}',
+            "icon": {
+                "path": "icons/check.png"
+            },
+            "arg": name,
+            "autocomplete": name
+        })
+    return result
+
+def get_all_formula_names(brewtype):
+    if brewtype == 'cask':
         response = requests.get('https://formulae.brew.sh/api/cask.json')
         icon_path = {"path": "icons/cask.png"}
-    elif sys.argv[1] == 'all_formula':
+    elif brewtype == 'formula':
         response = requests.get('https://formulae.brew.sh/api/formula.json')
         icon_path = {"path": "icons/brew.png"}
     data = response.json()
 
     items = []
     for item in data:
-        if sys.argv[1] == 'all_cask':
+        if brewtype == 'cask':
             name = item['name'][0]
             token = item['token']
             try:
                 subtitle = name + '  ℹ️ '+ item['desc']
             except:
                 subtitle = name
-            arg = f'https://formulae.brew.sh/cask/{token}#default'
-        elif sys.argv[1] == 'all_formula':
+        elif brewtype == 'formula':
             token = item['name']
             subtitle =  item['desc']
-            arg = f'https://formulae.brew.sh/formula/{token}#default'
         formula = {
             "valid": True,
             "title": token,
             "subtitle": subtitle,
-            "arg": arg,
+            "arg": token, 
             "icon": icon_path,
             "autocomplete": token,
-            "mods": {
-                "cmd": {
-                    "valid": True,
-                    "arg": item['homepage'],
-                    "subtitle": item['homepage']
-                },
-            }
+            "quicklookurl": f'https://formulae.brew.sh/{brewtype}/{token}#default',
+            "match": brewtype + ' ' + token
         }
         items.append(formula)
-
-    output = {"items": items}
-    
-    return output
+    return items
 
 
-def get_info(formula_name):
+def get_info(brewtype,formula_name):
+    output_data = {"items": []}
     token = formula_name.lower()
-    if sys.argv[2] == 'cask':
-        response = requests.get('https://formulae.brew.sh/api/cask/'+token+'.json')
-    elif sys.argv[2] == 'formula':
-        response = requests.get('https://formulae.brew.sh/api/formula/'+token+'.json')
+    response = requests.get(f'https://formulae.brew.sh/api/{brewtype}/{token}.json')
+    info_page = f'https://formulae.brew.sh/{brewtype}/{token}#default'
     data = response.json()
-    if sys.argv[2] == 'cask':
+    if brewtype == 'cask':
         version = data['version']
-    elif sys.argv[2] == 'formula':
+        auto_update = '\t🔄 Auto updates = ✅' if data['auto_updates'] == True else '\t🔄 Auto updates = ❌'
+        version_info = f'Newest version: {version}, {auto_update}'
+    elif brewtype == 'formula':
         if data['versions']['bottle'] == True:
             version = data['versions']['stable'] + ' (bottle)'
         else:  
             version = data['versions']['stable']
-    output_data = {
-        "items": [
-            {
-                "valid": True,
-                "title": data['homepage'],
-                "subtitle": "Open homepage",
-                "arg": data['homepage'],
-                "icon": {"path": "icons/homepage.png"},
-            },
-            {
-                "valid": False,
-                "title": f"30 Days:\t{data['analytics']['install']['30d'][token]}",
-                "icon": {"path": "icons/hot.png"},
-            },
-            {
-                "valid": False,
-                "title": f"90 Days:\t{data['analytics']['install']['90d'][token]}",
-                "icon": {"path": "icons/hot.png"},
-            },
-            {
-                "valid": False,
-                "title": f"365 Days:\t{data['analytics']['install']['365d'][token]}",
-                "icon": {"path": "icons/hot.png"},
-            },
-            {
-                "valid": False,
-                "title": version,
-                "icon": {"path": "icons/uninstalled.png"},
-            }
-        ]
-    }
+        version_info = f'Newest version: {version}'
+    output_data['items'].extend([
+        {
+            "valid": True,
+            "title": data['homepage'],
+            "subtitle": "Open homepage",
+            "arg": data['homepage'],
+            "icon": {"path": "icons/homepage.png"},
+        },
+        {
+            "valid": True,
+            "title": info_page,
+            "subtitle": "Open brew.sh info page",
+            "arg": info_page,
+        },
+        {
+            "valid": False,
+            "title": f"Installs (30 days): {data['analytics']['install']['30d'][token]}\t(90 days): {data['analytics']['install']['90d'][token]}\t (365 days): {data['analytics']['install']['365d'][token]}",
+            "icon": {"path": "icons/hot.png"},
+        },
+        {
+            "valid": False,
+            'title': version_info,
+            "icon": {"path": "icons/version.png"},
+        }
+    ])
     return output_data
 
-def get_commands(formula_name):
-    token = formula_name.lower()
-    if sys.argv[2] == 'cask':
-        response = requests.get('https://formulae.brew.sh/api/cask/'+token+'.json')
-        install_command = 'brew install --cask '+ token
-        info_command = 'brew info --cask '+ token
-    elif sys.argv[2] == 'formula':
-        response = requests.get('https://formulae.brew.sh/api/formula/'+token+'.json')
-        install_command = 'brew install '+ token
-        info_command = 'brew info '+ token
-    data = response.json()
-    if sys.argv[2] == 'cask':
-        name = data['name'][0]
-    elif sys.argv[2] == 'formula':
-        name = data['name']
-    ouput_data = {
-        "items": [
-            {
-                "valid": True,
-                "title": install_command,
-                "subtitle": "Run install command of "+ name,
-                "arg": install_command,
-                "icon": {"path": "icons/install.png"},
-            },
-            {
-                "valid": True,
-                "title": info_command,
-                "subtitle": "Run info command of "+ name,
-                "arg": info_command,
-                "icon": {"path": "icons/info.png"},
-            },
-        ]
-    }
-    return ouput_data
 
-if sys.argv[1] == 'all_formula' or sys.argv[1] == 'all_cask':
-    print(json.dumps(get_all_formula_names()))
-elif sys.argv[1] == 'get_commands':
-    print(json.dumps(get_commands(sys.argv[3])))
-elif sys.argv[1] == 'get_info':
-    print(json.dumps(get_info(sys.argv[3])))
+if  __name__ == '__main__':
+    output_data = {"items": []}
+    if sys.argv[1] == 'all':
+        output_data['items'].extend(get_all_formula_names(brewtype='cask'))
+        output_data['items'].extend(get_all_formula_names(brewtype='formula'))
+    elif sys.argv[1] == 'list':
+        output_data = get_brew_list()
+    elif sys.argv[1] == 'leaves':
+        output_data = get_brew_leaves()
+    elif sys.argv[1] == 'get_info':
+        try:
+            output_data = get_info('cask',sys.argv[2])
+        except:
+            output_data = get_info('formula',sys.argv[2])
+    if sys.argv[1] == 'outdated':
+        output_data = get_outdated_list()
+        
+    print(json.dumps(output_data))
