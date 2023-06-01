@@ -1,5 +1,5 @@
 # Easy Homebrew
-An Alfred workflow to make homebrew right on Alfred -- Search, get details and run commands.
+It is an Alfred workflow for you to easy brew on Alfred -- Search, get details and run Homebrew commands.
 
 ## Requirments
 - Required: Python3, [Alfred PowerPack](https://www.alfredapp.com/powerpack/)
@@ -19,9 +19,10 @@ An Alfred workflow to make homebrew right on Alfred -- Search, get details and r
 
 ![](https://i.imgur.com/DqVLWzu.png)
 
-- In the dropdown list, select any items and press `enter` to see more details and applicable commands, commands include install, uninstall, upgrade, show info ... Commands will depend on install status.
+- In the dropdown list, select any items and press `enter` to see more details and applicable commands, commands include install, uninstall, upgrade, show info ... Commands will depend on install status. 
+- There is also a keyword `info` for quickly acess commands and details for a specific cask/formula.
 
-![](https://i.imgur.com/30rtVus.png)
+![](https://i.imgur.com/fpT5bNd.png)
 
 - View lists of homebrew leaves, installed formulae and casks, and outdated ones by typing keywords `leaves`, `list` and `outdated`.
   - I also added the default search_keyword `brew` to show installed and outdated lists, so that you can see whether a package is installed, or outdated. 
@@ -29,6 +30,7 @@ An Alfred workflow to make homebrew right on Alfred -- Search, get details and r
   - In `leaves` and `list`, tab-complete to view info and `enter` to view/run commands as you do with default `brew` search.
   - In `leaves`, quicklook is also available.
 
+![](https://i.imgur.com/67Is56w.png)
 ![](https://i.imgur.com/tMsw96l.png)
 ![](https://i.imgur.com/NaYjGaw.png)
 
