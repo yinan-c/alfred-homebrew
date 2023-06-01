@@ -272,7 +272,7 @@ python3 brewinfo.py "all"</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Show all Homebrew formulae and casks</string>
+				<string>Show all Homebrew formulae and casks, filter by adding "cask", "formula"</string>
 				<key>title</key>
 				<string>Search Homebrew</string>
 				<key>type</key>
@@ -850,16 +850,17 @@ python3 brewinfo.py 'leaves'</string>
 	</array>
 	<key>readme</key>
 	<string># Easy Homebrew
-An Alfred workflow to make Homebrew right on Alfred -- search, get details and run commands.
-More detailed README with figures can be found on [GitHub](https://github.com/yinan-c/alfred-homebrew)
+An Alfred workflow for you to easy brew on Alfred -- Search, get details and run Homebrew commands.
+A more detailed README with figures can be found on [GitHub](https://github.com/yinan-c/alfred-homebrew)
 
-## Requirments
+## Requirements 
+- Python3
 - [Homebrew](https://brew.sh/) required to view and run commands, searching for casks and formulae information does not rely on Homebrew.
 
 ## Usage
 
 - Default search key `brew` to show and search for all formulae and casks
-	- Add 'cask' or 'formula' to your query (before or after) to further filter results 
+	- Add `cask` or `formula` to your query (before or after) to further filter results 
 	- Quicklook information page on brew.sh by pressing `command + Y` on selected entries.
 
 
@@ -868,6 +869,7 @@ More detailed README with figures can be found on [GitHub](https://github.com/yi
 	- Quicklook urls are supported for all urls.
 
 - Press `enter` on selected items to view and run commands.
+- There is also a keyword `info` for quickly acess commands and details for a specific cask/formula.
 
 
 - Homebrew leaves, installed formulae and casks, and outdated ones by type keywords `leaves`, `list` and `outdated`.
@@ -898,7 +900,7 @@ More detailed README with figures can be found on [GitHub](https://github.com/yi
 		<key>56DD91CF-0600-483C-8D9A-FEA93162B9D8</key>
 		<dict>
 			<key>note</key>
-			<string>Search results to get info and commands</string>
+			<string>Get info and commands</string>
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
@@ -1014,9 +1016,9 @@ More detailed README with figures can be found on [GitHub](https://github.com/yi
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>List all formula and casks (including installed and outdated packages), filter by adding "cask" and "formula"</string>
 			<key>label</key>
-			<string>Search keyword</string>
+			<string>Default search keyword</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1079,7 +1081,7 @@ More detailed README with figures can be found on [GitHub](https://github.com/yi
 			<key>description</key>
 			<string>A leaf in Homebrew is a formula that is not a dependency of another installed formula</string>
 			<key>label</key>
-			<string>Show leaves keyword</string>
+			<string>Show brew leaves keyword</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1098,15 +1100,17 @@ More detailed README with figures can be found on [GitHub](https://github.com/yi
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Check the status/commands of a certain formula/cask</string>
+			<string>Check the install status/commands of a certain formula/cask</string>
 			<key>label</key>
-			<string>Show status and commands keyword</string>
+			<string>Show commands keyword</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>info_key</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>1.2</string>
 	<key>webaddress</key>
