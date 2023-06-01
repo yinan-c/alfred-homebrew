@@ -27,7 +27,7 @@ def get_outdated_list(brewtype='all'):
                 },
                 "arg": 'brew upgrade ' + name,
                 "autocomplete": name,
-                "quicklookurl": f'https://formulae.brew.sh/formula/{name}#default'
+                "quicklookurl": f'https://formulae.brew.sh/formula/{name}'
             })
 
     if 'casks' in outdated_list:
@@ -44,7 +44,7 @@ def get_outdated_list(brewtype='all'):
                 },
                 "arg": 'brew upgrade --cask ' + name,
                 "autocomplete": name,
-                "quicklookurl": f'https://formulae.brew.sh/cask/{name}#default'
+                "quicklookurl": f'https://formulae.brew.sh/cask/{name}'
             })
     if not result["items"]:
         result["items"].append({
@@ -80,7 +80,7 @@ def get_brew_leaves():
             },
             "arg": line,
             "autocomplete": line,
-            "quicklookurl": f'https://formulae.brew.sh/formula/{line}#default'
+            "quicklookurl": f'https://formulae.brew.sh/formula/{line}'
         })
     return result
 
@@ -109,14 +109,9 @@ def get_brew_list(brewtype='all'):
     return result
 
 def get_all_formula_names(brewtype):
-    if brewtype == 'cask':
-        response = requests.get('https://formulae.brew.sh/api/cask.json')
-        icon_path = {"path": "icons/cask.png"}
-    elif brewtype == 'formula':
-        response = requests.get('https://formulae.brew.sh/api/formula.json')
-        icon_path = {"path": "icons/brew.png"}
+    response = requests.get('https://formulae.brew.sh/api/'+brewtype+'.json')
+    icon_path = {"path": f"icons/{brewtype}.png"}
     data = response.json()
-
     items = []
     for item in data:
         if brewtype == 'cask':
@@ -136,7 +131,7 @@ def get_all_formula_names(brewtype):
             "arg": token, 
             "icon": icon_path,
             "autocomplete": token,
-            "quicklookurl": f'https://formulae.brew.sh/{brewtype}/{token}#default',
+            "quicklookurl": f'https://formulae.brew.sh/{brewtype}/{token}',
             "match": brewtype + ' ' + token
         }
         items.append(formula)
@@ -147,7 +142,7 @@ def get_info(brewtype,formula_name):
     output_data = {"items": []}
     token = formula_name.lower()
     response = requests.get(f'https://formulae.brew.sh/api/{brewtype}/{token}.json')
-    info_page = f'https://formulae.brew.sh/{brewtype}/{token}#default'
+    info_page = f'https://formulae.brew.sh/{brewtype}/{token}'
     data = response.json()
     if brewtype == 'cask':
         version = data['version']

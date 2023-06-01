@@ -3,9 +3,8 @@ import requests
 import json
 from brewinfo import get_brew_list
 from brewinfo import get_info
-from brewinfo import get_brew_leaves
 
-def check_formula_and_compare_versions(formula_name, version):
+def compare_versions(formula_name, version):
     brew_list = get_brew_list()
     for item in brew_list["items"]:
         if item["arg"] == formula_name:
@@ -14,41 +13,60 @@ def check_formula_and_compare_versions(formula_name, version):
                 return "Installed and version matches.", installed_version
             else:
                 return "Installed but version does not match.", installed_version
-    return "Formula not installed.", None
+    return "Not installed.", None
 
 def get_commands(brewtype,formula_name):
     token = formula_name.lower()
     info_command = 'brew info '+ token
+    response = requests.get('https://formulae.brew.sh/api/'+brewtype+'/'+token+'.json')
+    data = response.json()
+    icon_path = {"path": f"icons/{brewtype}.png"}
+
     if brewtype == 'cask':
-        response = requests.get('https://formulae.brew.sh/api/cask/'+token+'.json')
         install_command = 'brew install --cask '+ token
         uninstall_command = 'brew uninstall --cask '+ token
         force_uninstall_command = 'brew uninstall --force --zap --cask '+ token
         upgrade_command = 'brew upgrade --cask '+ token
+        name = data['name'][0]
+        version = data['version']
+        try:
+            subtitle = name + '  ℹ️ '+ data['desc']
+        except:
+            subtitle = name
+
     elif brewtype == 'formula':
-        response = requests.get('https://formulae.brew.sh/api/formula/'+token+'.json')
         install_command = 'brew install '+ token
         uninstall_command = 'brew uninstall '+ token
         upgrade_command = 'brew upgrade '+ token
-    data = response.json()
-    if brewtype == 'cask':
-        name = data['name'][0]
-        version = data['version']
-    elif brewtype == 'formula':
         name = data['name']
+        subtitle =  data['desc']
         version = data['versions']['stable']
+    
+    information = {
+            "valid": True,
+            "title": token,
+            "subtitle": subtitle,
+            "arg": "brew info "+ token,
+            "icon": icon_path,
+            "autocomplete": token,
+            "quicklookurl": f'https://formulae.brew.sh/{brewtype}/{token}',
+            "match": brewtype + ' ' + token
+        }
+    back_button = {
+        "title": "Back to list",
+        "arg": 1,
+        "icon": {"path": "icons/back.png"},
+        "valid": True
+    }
+
     output_data = {
         "items": [
-            {
-            "title": "Back to search",
-            "arg": 1,
-            "icon": {"path": "icons/back.png"},
-            "valid": True
-            }
+            back_button,
+            information,
         ]
     }
-    status, installed_version = check_formula_and_compare_versions(token, version)
-    if status == "Formula not installed.":
+    status, installed_version = compare_versions(token, version)
+    if status == "Not installed.":
         output_data["items"].extend([
         {
             "valid": True,
@@ -153,7 +171,7 @@ if __name__ == '__main__':
             output_data = {
             "items": [
                 {
-                "title": "No cask/formula found, back to search",
+                "title": "No cask/formula found yet, ⏎ back to list",
                 "arg": 1,
                 "icon": {"path": "icons/back.png"},
                 "valid": True
