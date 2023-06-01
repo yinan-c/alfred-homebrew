@@ -7,7 +7,7 @@ def get_outdated_list(brewtype='all'):
     if brewtype == 'cask':
         output = subprocess.run(['brew', 'outdated', '--cask', '--json'], capture_output=True, text=True)
     elif brewtype == 'formula':
-        output = subprocess.run(['brew', 'outdated', '--json'], capture_output=True, text=True)
+        output = subprocess.run(['brew', 'outdated', '--formula', '--json'], capture_output=True, text=True)
     else:
         output = subprocess.run(['brew', 'outdated', '--json'], capture_output=True, text=True)
 
@@ -21,7 +21,7 @@ def get_outdated_list(brewtype='all'):
 
             result["items"].append({
                 "title": f'{name} ({installed_version}) < {current_version}',
-                "subtitle": f'Enter to run "brew upgrade {name}"',
+                "subtitle": f'⏎ to run "brew upgrade {name}"',
                 "icon": {
                     "path": "icons/formula_outdated.png" 
                 },
@@ -38,7 +38,7 @@ def get_outdated_list(brewtype='all'):
 
             result["items"].append({
                 "title": f'{name} ({installed_version}) < {current_version}',
-                "subtitle": f'Enter to run "brew upgrade --cask {name}"',
+                "subtitle": f'⏎ to run "brew upgrade --cask {name}"',
                 "icon": {
                     "path": "icons/cask_outdated.png" 
                 },

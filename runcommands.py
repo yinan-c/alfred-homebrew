@@ -3,6 +3,7 @@ import requests
 import json
 from brewinfo import get_brew_list
 from brewinfo import get_info
+from brewinfo import get_brew_leaves
 
 def check_formula_and_compare_versions(formula_name, version):
     brew_list = get_brew_list()
@@ -22,6 +23,7 @@ def get_commands(brewtype,formula_name):
         response = requests.get('https://formulae.brew.sh/api/cask/'+token+'.json')
         install_command = 'brew install --cask '+ token
         uninstall_command = 'brew uninstall --cask '+ token
+        force_uninstall_command = 'brew uninstall --force --zap --cask '+ token
         upgrade_command = 'brew upgrade --cask '+ token
     elif brewtype == 'formula':
         response = requests.get('https://formulae.brew.sh/api/formula/'+token+'.json')
@@ -50,7 +52,7 @@ def get_commands(brewtype,formula_name):
         output_data["items"].extend([
         {
             "valid": True,
-            "title": 'Not installed. Enter to install.',
+            "title": 'Not installed. ⏎ to install.',
             "arg": install_command,
             "subtitle": install_command,
             "icon": {"path": "icons/install.png"},
@@ -64,44 +66,78 @@ def get_commands(brewtype,formula_name):
         },
         ])
     elif status == "Installed and version matches.":
-        output_data["items"].extend([
+        output_data["items"].append(
         {
             "valid": False,
             "title": 'Great! You are up to date.',
             "icon": {"path": "icons/uptodate.png"},
-        },
+        })
+        if brewtype == 'cask':  #  force clean uninstall for casks
+            output_data["items"].append(
+            {   
+                "valid": True,
+                "subtitle": uninstall_command,
+                "title": f"Uninstall cask {name}, ⌘ + ⏎ to force clean uninstall.",
+                "arg": uninstall_command,
+                "icon": {"path": "icons/uninstall.png"},
+                "mods": {
+                    "cmd": {
+                        "valid": True,
+                        "subtitle": force_uninstall_command,
+                        "arg": force_uninstall_command,
+                    },
+            },
+            },
+            )
+        elif brewtype == 'formula':  # No force clean uninstall for formulas
+            output_data["items"].append(
+            {   
+                "valid": True,
+                "subtitle": uninstall_command,
+                "title": f"Uninstall formula {name}",
+                "arg": uninstall_command,
+                "icon": {"path": "icons/uninstall.png"},
+            },
+            )
+    elif status == "Installed but version does not match." and brewtype == 'cask':
+        output_data["items"].extend([
         {
             "valid": True,
+            "title": 'Version mismatch, installed '+ installed_version+ ' < '+ version,
+            "subtitle": f"⏎ to force upgrade cask {name}, regardless of in-app auto updates.",
+            "icon": {"path": "icons/outdated.png"},
+            "arg": upgrade_command
+        },
+        {   
+            "valid": True,
             "subtitle": uninstall_command,
-            "title": f"Uninstall {name}, command + enter to clean uninstall.",
+            "title": f"Uninstall cask {name}, ⌘ + ⏎ to force clean uninstall.",
             "arg": uninstall_command,
             "icon": {"path": "icons/uninstall.png"},
             "mods": {
                 "cmd": {
                     "valid": True,
-                    "subtitle": "brew uninstall --force --zap --cask "+ name,
-                    "arg": "brew uninstall --force --zap --cask "+ name,
+                    "subtitle": force_uninstall_command,
+                    "arg": force_uninstall_command,
                 },
-        },
-        },
-        ])
-    elif status == "Installed but version does not match.":
+            },  
+        },])
+    elif status == "Installed but version does not match." and brewtype == 'formula':
         output_data["items"].extend([
         {
             "valid": True,
             "title": 'Version mismatch, installed '+ installed_version+ ' < '+ version,
-            "subtitle": "Enter to force upgrade cask.",
+            "subtitle": f"⏎ to upgrade formula {name}.",
             "icon": {"path": "icons/outdated.png"},
             "arg": upgrade_command
         },
-        {
+        {   
             "valid": True,
-            "title": uninstall_command,
-            "subtitle": "Run uninstall command of "+ name,
+            "subtitle": uninstall_command,
+            "title": f"Uninstall formula {name}",
             "arg": uninstall_command,
             "icon": {"path": "icons/uninstall.png"},
-        },
-        ])
+        },])
     return output_data
 
 if __name__ == '__main__':
