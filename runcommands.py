@@ -142,21 +142,21 @@ def get_commands(brewtype,formula_name):
 
 if __name__ == '__main__':
     output_data = {"items": []}
-    if sys.argv[1] == '':
-        output_data = {
-        "items": [
-            {
-            "title": "Back to search",
-            "arg": 1,
-            "icon": {"path": "icons/back.png"},
-            "valid": True
-            }
-        ]}
-    else:
+    try:
+        output_data = get_commands('cask',sys.argv[1])
+        output_data['items'].extend(get_info('cask',sys.argv[1])['items'])
+    except:
         try:
-            output_data = get_commands('cask',sys.argv[1])
-            output_data['items'].extend(get_info('cask',sys.argv[1])['items'])
-        except:
             output_data = get_commands('formula',sys.argv[1])
             output_data['items'].extend(get_info('formula',sys.argv[1])['items'])
+        except:
+            output_data = {
+            "items": [
+                {
+                "title": "No cask/formula found, back to search",
+                "arg": 1,
+                "icon": {"path": "icons/back.png"},
+                "valid": True
+            }
+            ]}
     print(json.dumps(output_data))

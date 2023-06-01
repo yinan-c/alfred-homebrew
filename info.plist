@@ -200,6 +200,8 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:info_key}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -225,7 +227,7 @@ python3 runcommands.py "$1"</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -896,7 +898,7 @@ More detailed README with figures can be found on [GitHub](https://github.com/yi
 		<key>56DD91CF-0600-483C-8D9A-FEA93162B9D8</key>
 		<dict>
 			<key>note</key>
-			<string>`Enter` on search results to get info and commands</string>
+			<string>Search results to get info and commands</string>
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
@@ -1082,6 +1084,27 @@ More detailed README with figures can be found on [GitHub](https://github.com/yi
 			<string>textfield</string>
 			<key>variable</key>
 			<string>leaves_key</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>info</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Check the status/commands of a certain formula/cask</string>
+			<key>label</key>
+			<string>Show status and commands keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>info_key</string>
 		</dict>
 	</array>
 	<key>version</key>
