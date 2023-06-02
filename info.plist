@@ -10,7 +10,32 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A224D9F6-F167-4BA3-A4CC-850D263EADB8</string>
+				<string>E8726093-9079-4DB6-A6F9-F548C8E12FCD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1D488D7D-CCBE-497D-BC6A-32E064C7B948</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2D53BA67-B3C4-445F-B3BD-D2187C945103</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>5360FA33-7C78-4B5F-944F-3C04E6FA1DA3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9AA7C218-0848-4D2A-9205-C33B027F6AA6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -23,7 +48,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A224D9F6-F167-4BA3-A4CC-850D263EADB8</string>
+				<string>E8726093-9079-4DB6-A6F9-F548C8E12FCD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -88,7 +113,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A224D9F6-F167-4BA3-A4CC-850D263EADB8</string>
+				<string>E8726093-9079-4DB6-A6F9-F548C8E12FCD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -127,7 +152,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A224D9F6-F167-4BA3-A4CC-850D263EADB8</string>
+				<string>E8726093-9079-4DB6-A6F9-F548C8E12FCD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -165,7 +190,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>9AA7C218-0848-4D2A-9205-C33B027F6AA6</string>
+				<string>1D488D7D-CCBE-497D-BC6A-32E064C7B948</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -200,8 +225,6 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
-				<key>keyword</key>
-				<string>{var:info_key}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -211,19 +234,19 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading commands ...</string>
+				<string>Loading information and commands ...</string>
 				<key>script</key>
 				<string>export PYTHONPATH='./libs/'
 
-python3 runcommands.py "$1"</string>
+python3 runcommands.py "$1" "button-on" "description-on"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>Show all Homebrew formulae and casks, filter by adding "cask", "formula"</string>
 				<key>title</key>
-				<string>Loading more info and commands</string>
+				<string></string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -262,7 +285,7 @@ python3 runcommands.py "$1"</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading all formulae and casks ...</string>
+				<string>Loading all formulae and casks from brew.sh ...</string>
 				<key>script</key>
 				<string>export PYTHONPATH='./libs/'
 
@@ -274,7 +297,7 @@ python3 brewinfo.py "all"</string>
 				<key>subtext</key>
 				<string>Show all Homebrew formulae and casks, filter by adding "cask", "formula"</string>
 				<key>title</key>
-				<string>Search Homebrew</string>
+				<string>{var:search_key}</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -291,7 +314,7 @@ python3 brewinfo.py "all"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>brew </string>
+				<string>{var:search_key}  </string>
 				<key>leftcursor</key>
 				<false/>
 			</dict>
@@ -331,6 +354,59 @@ python3 brewinfo.py "all"</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>E8726093-9079-4DB6-A6F9-F548C8E12FCD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>2D53BA67-B3C4-445F-B3BD-D2187C945103</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>http*</string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>5360FA33-7C78-4B5F-944F-3C04E6FA1DA3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>1D488D7D-CCBE-497D-BC6A-32E064C7B948</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -413,7 +489,7 @@ python3 brewinfo.py "get_info" "$1"</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading installed list ...</string>
+				<string>Loading Homebrew installed list ...</string>
 				<key>script</key>
 				<string>export PYTHONPATH='./libs/'
 
@@ -425,9 +501,9 @@ python3 brewinfo.py 'list'</string>
 				<key>skipuniversalaction</key>
 				<true/>
 				<key>subtext</key>
-				<string></string>
-				<key>title</key>
 				<string>Show Homebrew installed list</string>
+				<key>title</key>
+				<string>{var:list_key}</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -439,21 +515,6 @@ python3 brewinfo.py 'list'</string>
 			<string>D9940D7F-26F6-4863-B794-A8DFE5085CB1</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>9AA7C218-0848-4D2A-9205-C33B027F6AA6</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -493,9 +554,9 @@ python3 brewinfo.py 'outdated'</string>
 				<key>skipuniversalaction</key>
 				<true/>
 				<key>subtext</key>
-				<string></string>
-				<key>title</key>
 				<string>Show Homebrew outdated list</string>
+				<key>title</key>
+				<string>{var:outdated_key}</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -507,6 +568,21 @@ python3 brewinfo.py 'outdated'</string>
 			<string>7EF7399D-3A22-4E7D-A550-F908DA2232BD</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>9AA7C218-0848-4D2A-9205-C33B027F6AA6</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -538,7 +614,7 @@ python3 brewinfo.py 'outdated'</string>
 				<key>script</key>
 				<string>export PYTHONPATH='./libs/'
 
-python3 brewinfo.py "get_info" "$1"</string>
+python3 runcommands.py "$1" "button-off" "description-on"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -601,7 +677,7 @@ python3 brewinfo.py 'list'</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Show Homebrew installed list</string>
+				<string></string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -697,7 +773,7 @@ python3 brewinfo.py 'outdated'</string>
 				<key>script</key>
 				<string>export PYTHONPATH='./libs/'
 
-python3 brewinfo.py "get_info"  "$1"</string>
+python3 runcommands.py "$1" "button-off" "description-off"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -717,59 +793,6 @@ python3 brewinfo.py "get_info"  "$1"</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>7FE62E07-46EC-411E-83CC-B86FA6642445</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>{var:leaves_key}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>export PYTHONPATH='./libs/'
-
-python3 brewinfo.py "get_info" "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>skipuniversalaction</key>
-				<true/>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>0EC8907B-AB17-4C36-BB36-AA47EE62CDA2</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -811,9 +834,9 @@ python3 brewinfo.py 'leaves'</string>
 				<key>skipuniversalaction</key>
 				<true/>
 				<key>subtext</key>
-				<string></string>
-				<key>title</key>
 				<string>Show Homebrew leaves</string>
+				<key>title</key>
+				<string>{var:leaves_key}</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -829,23 +852,55 @@ python3 brewinfo.py 'leaves'</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>alfredfiltersresults</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:leaves_key}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
 				<string></string>
-				<key>url</key>
-				<string>{query}</string>
+				<key>script</key>
+				<string>export PYTHONPATH='./libs/'
+
+python3 runcommands.py "$1" "button-off" "description-on"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>A224D9F6-F167-4BA3-A4CC-850D263EADB8</string>
+			<string>0EC8907B-AB17-4C36-BB36-AA47EE62CDA2</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -864,13 +919,10 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 	- Quicklook information page on brew.sh by pressing `command + Y` on selected entries.
 
 
-- Continue to **type full name** or **tab-complete** the selected items (if enabled in Alfred) to show details.
-	- Press `enter` on urls will open them in browser.
+- Continue to **type full name** or **tab-complete** the selected items to show details and commands.
+- Or you can press `enter` on selected items in the list to enter the commands submenu.
+	- Press `enter` on urls will open them in browser, on commands will run them in terminal.
 	- Quicklook urls are supported for all urls.
-
-- Press `enter` on selected items to view and run commands.
-- There is also a keyword `info` for quickly acess commands and details for a specific cask/formula.
-
 
 - Homebrew leaves, installed formulae and casks, and outdated ones by type keywords `leaves`, `list` and `outdated`.
 	- In outdated list, update one-by-one or all-at-once with a simple `enter`.
@@ -888,14 +940,28 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>580</real>
+		</dict>
+		<key>1D488D7D-CCBE-497D-BC6A-32E064C7B948</key>
+		<dict>
+			<key>xpos</key>
+			<real>845</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
+		<key>2D53BA67-B3C4-445F-B3BD-D2187C945103</key>
+		<dict>
+			<key>xpos</key>
+			<real>955</real>
+			<key>ypos</key>
+			<real>115</real>
 		</dict>
 		<key>36959E5D-3E10-4D8B-A2BD-9787F735611C</key>
 		<dict>
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>345</real>
 		</dict>
 		<key>56DD91CF-0600-483C-8D9A-FEA93162B9D8</key>
 		<dict>
@@ -909,7 +975,7 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 		<key>63DBC961-C67B-40F3-80D6-9E528AA80A13</key>
 		<dict>
 			<key>xpos</key>
-			<real>905</real>
+			<real>845</real>
 			<key>ypos</key>
 			<real>110</real>
 		</dict>
@@ -920,14 +986,14 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 			<key>xpos</key>
 			<real>90</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>365</real>
 		</dict>
 		<key>765A9E5E-3DE6-4CEB-A708-ED1E1C621785</key>
 		<dict>
 			<key>xpos</key>
 			<real>90</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>525</real>
 		</dict>
 		<key>7EF7399D-3A22-4E7D-A550-F908DA2232BD</key>
 		<dict>
@@ -941,23 +1007,14 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>460</real>
 		</dict>
 		<key>9AA7C218-0848-4D2A-9205-C33B027F6AA6</key>
 		<dict>
 			<key>xpos</key>
-			<real>900</real>
+			<real>955</real>
 			<key>ypos</key>
 			<real>265</real>
-		</dict>
-		<key>A224D9F6-F167-4BA3-A4CC-850D263EADB8</key>
-		<dict>
-			<key>note</key>
-			<string>This part is for getting information</string>
-			<key>xpos</key>
-			<real>660</real>
-			<key>ypos</key>
-			<real>615</real>
 		</dict>
 		<key>BC8D8EF2-1DF2-4475-A32C-CC1F36BB83DC</key>
 		<dict>
@@ -975,21 +1032,21 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>390</real>
 		</dict>
 		<key>D2D20215-A3B4-48D9-B7AE-B27D69B1DA8F</key>
 		<dict>
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>230</real>
 		</dict>
 		<key>D9940D7F-26F6-4863-B794-A8DFE5085CB1</key>
 		<dict>
 			<key>xpos</key>
 			<real>90</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>245</real>
 		</dict>
 		<key>E8726093-9079-4DB6-A6F9-F548C8E12FCD</key>
 		<dict>
@@ -1087,32 +1144,9 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 			<key>variable</key>
 			<string>leaves_key</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>info</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Check the install status/commands of a certain formula/cask</string>
-			<key>label</key>
-			<string>Show commands keyword</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>info_key</string>
-		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>1.2</string>
+	<string>1.3</string>
 	<key>webaddress</key>
 	<string>github.com/yinan-c/alfred-homebrew</string>
 </dict>

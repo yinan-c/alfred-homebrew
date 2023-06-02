@@ -43,10 +43,9 @@ def get_commands(brewtype,formula_name):
         version = data['versions']['stable']
     
     information = {
-            "valid": True,
+            "valid": False,
             "title": token,
             "subtitle": subtitle,
-            "arg": "brew info "+ token,
             "icon": icon_path,
             "autocomplete": token,
             "quicklookurl": f'https://formulae.brew.sh/{brewtype}/{token}',
@@ -58,19 +57,18 @@ def get_commands(brewtype,formula_name):
         "icon": {"path": "icons/back.png"},
         "valid": True
     }
-
-    output_data = {
-        "items": [
-            back_button,
-            information,
-        ]
-    }
+    output_data = {"items": []}
+    if description_toggle == 'description-on':
+        output_data["items"].append(information)
+    if button_toggle == 'button-on':
+        output_data["items"].append(back_button)
+    
     status, installed_version = compare_versions(token, version)
     if status == "Not installed.":
         output_data["items"].extend([
         {
             "valid": True,
-            "title": 'Not installed. ⏎ to install.',
+            "title": f'Not installed. ⏎ to install {name}.',
             "arg": install_command,
             "subtitle": install_command,
             "icon": {"path": "icons/install.png"},
@@ -159,6 +157,14 @@ def get_commands(brewtype,formula_name):
     return output_data
 
 if __name__ == '__main__':
+    button_toggle = sys.argv[2]
+    description_toggle = sys.argv[3]
+    button = {
+        "title": "Back to list",
+        "arg": 1,
+        "icon": {"path": "icons/back.png"},
+        "valid": True
+    }
     output_data = {"items": []}
     try:
         output_data = get_commands('cask',sys.argv[1])
@@ -168,13 +174,6 @@ if __name__ == '__main__':
             output_data = get_commands('formula',sys.argv[1])
             output_data['items'].extend(get_info('formula',sys.argv[1])['items'])
         except:
-            output_data = {
-            "items": [
-                {
-                "title": "No cask/formula found yet, ⏎ back to list",
-                "arg": 1,
-                "icon": {"path": "icons/back.png"},
-                "valid": True
-            }
-            ]}
+            if button_toggle == 'button-on':
+                output_data["items"].append(button)
     print(json.dumps(output_data))

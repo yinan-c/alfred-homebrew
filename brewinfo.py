@@ -50,7 +50,7 @@ def get_outdated_list(brewtype='all'):
         result["items"].append({
             "title": "Everything is up to date",
             "icon": {
-                "path": "icons/check.png"
+                "path": "icons/uptodate.png"
             },
             "valid": False
         })
