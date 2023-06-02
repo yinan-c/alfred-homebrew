@@ -13,16 +13,13 @@ It is an Alfred workflow for you to easy brew on Alfred -- Search, get details a
 
 ![](https://i.imgur.com/ucsFm1l.png)
 
-- Continue to **type the full name** or **tab-complete** the selected items (if enabled in Alfred) to show details of information (Analytics, install status and newest versions, urls ...) an commands.
+- Continue to **type the full name** or **tab-complete** the selected items (if enabled in Alfred) to show details of information (Analytics, install status and newest versions, urls ...) and commands, commands include install, uninstall, upgrade, show info ... Commands will depend on install status. 
+- Alternatively, in the dropdown list, select any items and press `enter` to see more details and applicable commands.
+
    - Press `enter` on urls will open them in the browser, on commands will run them in terminal.
    - Quicklook urls are supported for all urls.
 
-![](https://i.imgur.com/DqVLWzu.png)
-
-- In the dropdown list, select any items and press `enter` to see more details and applicable commands, commands include install, uninstall, upgrade, show info ... Commands will depend on install status. 
-- There is also a keyword `info` for quickly acess commands and details for a specific cask/formula.
-
-![](https://i.imgur.com/fpT5bNd.png)
+![](https://i.imgur.com/NjZ3EgR.png)
 
 - View lists of homebrew leaves, installed formulae and casks, and outdated ones by typing keywords `leaves`, `list` and `outdated`.
   - I also added the default search_keyword `brew` to show installed and outdated lists, so that you can see whether a package is installed, or outdated. 
@@ -32,7 +29,7 @@ It is an Alfred workflow for you to easy brew on Alfred -- Search, get details a
 
 ![](https://i.imgur.com/67Is56w.png)
 ![](https://i.imgur.com/tMsw96l.png)
-![](https://i.imgur.com/NaYjGaw.png)
+![](https://i.imgur.com/DdPJLLu.png)
 
 **PS:** In the scripts, every function returns results based on `brewtype` (either `cask` or `formula`), you can modify keywords and function arguments to make this workflow to the best your needs.
 
