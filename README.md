@@ -13,8 +13,8 @@ It is an Alfred workflow for you to easy brew on Alfred -- Search, get details a
 
 ![](https://i.imgur.com/ucsFm1l.png)
 
-- Continue to **type the full name** or **tab-complete** the selected items (if enabled in Alfred) to show details of information (Analytics, install versions and newest versions, urls ...).
-   - Press `enter` on urls will open them in the browser.
+- Continue to **type the full name** or **tab-complete** the selected items (if enabled in Alfred) to show details of information (Analytics, install status and newest versions, urls ...) an commands.
+   - Press `enter` on urls will open them in the browser, on commands will run them in terminal.
    - Quicklook urls are supported for all urls.
 
 ![](https://i.imgur.com/DqVLWzu.png)
