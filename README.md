@@ -1,7 +1,7 @@
 # Easy Homebrew
 It is an Alfred workflow for you to easy brew on Alfred -- Search, get details and run Homebrew commands.
 
-## Requirments
+## Requirements
 - Required: Python3, [Alfred PowerPack](https://www.alfredapp.com/powerpack/)
 - [Homebrew](https://brew.sh/) required to view and run commands, searching for casks and formulae information does not rely on homebrew.
 
