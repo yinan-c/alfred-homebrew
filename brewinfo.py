@@ -140,7 +140,7 @@ def get_all_formula_names(brewtype):
 
 def get_info(brewtype,formula_name):
     output_data = {"items": []}
-    token = formula_name.lower()
+    token = formula_name.lower().strip()
     response = requests.get(f'https://formulae.brew.sh/api/{brewtype}/{token}.json')
     info_page = f'https://formulae.brew.sh/{brewtype}/{token}'
     data = response.json()

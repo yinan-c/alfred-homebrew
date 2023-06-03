@@ -16,7 +16,7 @@ def compare_versions(formula_name, version):
     return "Not installed.", None
 
 def get_commands(brewtype,formula_name):
-    token = formula_name.lower()
+    token = formula_name.lower().strip()
     info_command = 'brew info '+ token
     response = requests.get('https://formulae.brew.sh/api/'+brewtype+'/'+token+'.json')
     data = response.json()
