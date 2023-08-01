@@ -1,4 +1,8 @@
 # Easy Homebrew
+
+![](https://img.shields.io/github/downloads/yinan-c/alfred-homebrew/total?label=Total%20Downloads)
+![](https://img.shields.io/github/languages/top/yinan-c/alfred-homebrew)
+
 It is an Alfred workflow for you to easy brew on Alfred -- Search, get details and run Homebrew commands.
 
 ## Requirements
