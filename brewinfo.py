@@ -80,17 +80,33 @@ def get_brew_leaves():
             },
             "arg": line,
             "autocomplete": line,
-            "quicklookurl": f'https://formulae.brew.sh/formula/{line}'
+            "quicklookurl": f'https://formulae.brew.sh/formula/{line}',
+            "mods": {
+                "cmd": {
+                    "valid": True,
+                    "subtitle": 'brew uninstall ' + line,
+                    "arg": 'brew uninstall ' + line,
+                },
+            },
         })
     return result
 
 def get_brew_list(brewtype='all'):
     if brewtype == 'cask':
         output = subprocess.run(['brew', 'list', '--versions', '--cask'], capture_output=True, text=True)
+        uninstall_command = 'brew uninstall --cask '
+        force_uninstall_command = 'brew uninstall --cask --force --zap '
+        icon_path = {"path": "icons/cask_check.png"}
     elif brewtype == 'formula':
         output = subprocess.run(['brew', 'list', '--versions', '--formula'], capture_output=True, text=True)
+        uninstall_command = 'brew uninstall '
+        force_uninstall_command = 'brew uninstall '
+        icon_path = {"path": "icons/formula_check.png"}
     else:
         output = subprocess.run(['brew', 'list', '--versions'], capture_output=True, text=True)
+        uninstall_command = 'brew uninstall '
+        force_uninstall_command = 'brew uninstall --force '
+        icon_path = {"path": "icons/check.png"}
     lines = output.stdout.split('\n')
     result = {"items": []}
     for line in lines:
@@ -100,11 +116,21 @@ def get_brew_list(brewtype='all'):
 
         result["items"].append({
             "title": f'{name} - {version}',
-            "icon": {
-                "path": "icons/check.png"
-            },
+            "icon": icon_path,
             "arg": name,
-            "autocomplete": name
+            "autocomplete": name,
+            "mods": {
+                "alt": {
+                    "valid": True,
+                    "subtitle": uninstall_command + name,
+                    "arg": uninstall_command + name,
+                },
+                "cmd": {
+                    "valid": True,
+                    "subtitle": force_uninstall_command + name,
+                    "arg": force_uninstall_command + name,
+                },
+            },
         })
     return result
 
@@ -117,6 +143,7 @@ def get_all_formula_names(brewtype):
         if brewtype == 'cask':
             name = item['name'][0]
             token = item['token']
+            install_command = 'brew install --cask ' + token
             try:
                 subtitle = name + '  ℹ️ '+ item['desc']
             except:
@@ -124,6 +151,7 @@ def get_all_formula_names(brewtype):
         elif brewtype == 'formula':
             token = item['name']
             subtitle =  item['desc']
+            install_command = 'brew install ' + token
         formula = {
             "valid": True,
             "title": token,
@@ -132,7 +160,14 @@ def get_all_formula_names(brewtype):
             "icon": icon_path,
             "autocomplete": token,
             "quicklookurl": f'https://formulae.brew.sh/{brewtype}/{token}',
-            "match": brewtype + ' ' + token
+            "match": brewtype + ' ' + token,
+            "mods": {
+                "cmd": {
+                    "valid": True,
+                    "subtitle": install_command,
+                    "arg": install_command,
+                },
+            },
         }
         items.append(formula)
     return items
@@ -188,7 +223,9 @@ if  __name__ == '__main__':
         output_data['items'].extend(get_all_formula_names(brewtype='cask'))
         output_data['items'].extend(get_all_formula_names(brewtype='formula'))
     elif sys.argv[1] == 'list':
-        output_data = get_brew_list()
+#        output_data = get_brew_list()
+        output_data['items'].extend(get_brew_list(brewtype='cask')['items'])
+        output_data['items'].extend(get_brew_list(brewtype='formula')['items'])
     elif sys.argv[1] == 'leaves':
         output_data = get_brew_leaves()
     elif sys.argv[1] == 'get_info':
