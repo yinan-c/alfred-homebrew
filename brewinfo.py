@@ -164,7 +164,7 @@ def get_all_formula_names(brewtype):
             "mods": {
                 "cmd": {
                     "valid": True,
-                    "subtitle": install_command,
+                    "subtitle": "Run install commmand: " +install_command,
                     "arg": install_command,
                 },
             },

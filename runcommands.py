@@ -49,7 +49,14 @@ def get_commands(brewtype,formula_name):
             "icon": icon_path,
             "autocomplete": token,
             "quicklookurl": f'https://formulae.brew.sh/{brewtype}/{token}',
-            "match": brewtype + ' ' + token
+            "match": brewtype + ' ' + token,
+            "mods": {
+                "cmd": {
+                    "valid": True,
+                    "subtitle": "Run install command: "+ install_command,  
+                    "arg": install_command,
+                },
+            },
         }
     back_button = {
         "title": "Back to list",

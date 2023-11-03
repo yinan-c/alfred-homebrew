@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.yinanchen.alfred-homebrew</string>
+	<key>category</key>
+	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>0EC8907B-AB17-4C36-BB36-AA47EE62CDA2</key>
@@ -64,6 +66,16 @@
 				<string>E8726093-9079-4DB6-A6F9-F548C8E12FCD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9AA7C218-0848-4D2A-9205-C33B027F6AA6</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -980,6 +992,7 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 - Continue to **type full name** or **tab-complete** the selected items to show details and commands.
 - Or you can press `enter` on selected items in the list to enter the commands submenu.
 	- Press `enter` on urls will open them in browser, on commands will run them in terminal.
+	- `Command+ enter` on names will run install regardless of installed or uninstall.
 	- Quicklook urls are supported for all urls.
 
 ### Other lists: installed, outdated, leaves
@@ -1215,7 +1228,7 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.4</string>
+	<string>1.5</string>
 	<key>webaddress</key>
 	<string>github.com/yinan-c/alfred-homebrew</string>
 </dict>
