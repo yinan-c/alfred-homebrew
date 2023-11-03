@@ -82,6 +82,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>752B85EC-2CBC-489D-80EB-ED8FF0EAD07A</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>765A9E5E-3DE6-4CEB-A708-ED1E1C621785</key>
 		<array>
@@ -90,6 +100,16 @@
 				<string>56DD91CF-0600-483C-8D9A-FEA93162B9D8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>752B85EC-2CBC-489D-80EB-ED8FF0EAD07A</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -134,6 +154,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>752B85EC-2CBC-489D-80EB-ED8FF0EAD07A</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>BD2C7C03-8158-4EFC-926D-0F0C6680FCAA</key>
 		<array>
@@ -168,6 +198,16 @@
 				<string>56DD91CF-0600-483C-8D9A-FEA93162B9D8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>752B85EC-2CBC-489D-80EB-ED8FF0EAD07A</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -902,6 +942,21 @@ python3 runcommands.py "$1" "button-off" "description-on"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>752B85EC-2CBC-489D-80EB-ED8FF0EAD07A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Easy Homebrew
@@ -914,18 +969,23 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 
 ## Usage
 
+### List and quick install/uninstall
 - Default search key `brew` to show and search for all formulae and casks
-	- Add `cask` or `formula` to your query (before or after) to further filter results 
-	- Quicklook information page on brew.sh by pressing `command + Y` on selected entries.
+	- Select any casks/formula, directly install by `command + enter`
+	- In the dropdown list at the end, there will be an "outdated" list, where you can `enter` to update. There will be an "installed" list, where you can quickly uninstall by `command + enter`(clean uninstall) or `option + enter`.
+	- Add `cask` or `formula` to your query (before or after) to further filter results.
+	- Quicklook information page on https://brew.sh by pressing `command + Y` on selected entries.
 
-
+### Reveal details and run commands
 - Continue to **type full name** or **tab-complete** the selected items to show details and commands.
 - Or you can press `enter` on selected items in the list to enter the commands submenu.
 	- Press `enter` on urls will open them in browser, on commands will run them in terminal.
 	- Quicklook urls are supported for all urls.
 
+### Other lists: installed, outdated, leaves
 - Homebrew leaves, installed formulae and casks, and outdated ones by type keywords `leaves`, `list` and `outdated`.
 	- In outdated list, update one-by-one or all-at-once with a simple `enter`.
+	- In `leaves` and `list`, directly uninstall by `command + enter`(clean uninstall) or `option + enter`
 	- In `leaves` and `list`, tab-complete to view info and `enter` to view/run commands are also available.
 	- In `leaves`, quicklook is also available.
 
@@ -938,124 +998,131 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 		<key>0EC8907B-AB17-4C36-BB36-AA47EE62CDA2</key>
 		<dict>
 			<key>xpos</key>
-			<real>410</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>590</real>
 		</dict>
 		<key>1D488D7D-CCBE-497D-BC6A-32E064C7B948</key>
 		<dict>
 			<key>xpos</key>
-			<real>845</real>
+			<real>830</real>
 			<key>ypos</key>
-			<real>205</real>
+			<real>215</real>
 		</dict>
 		<key>2D53BA67-B3C4-445F-B3BD-D2187C945103</key>
 		<dict>
 			<key>xpos</key>
-			<real>955</real>
+			<real>940</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>125</real>
 		</dict>
 		<key>36959E5D-3E10-4D8B-A2BD-9787F735611C</key>
 		<dict>
 			<key>xpos</key>
-			<real>410</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>355</real>
 		</dict>
 		<key>56DD91CF-0600-483C-8D9A-FEA93162B9D8</key>
 		<dict>
 			<key>note</key>
 			<string>Get info and commands</string>
 			<key>xpos</key>
-			<real>410</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>95</real>
+			<real>105</real>
 		</dict>
 		<key>63DBC961-C67B-40F3-80D6-9E528AA80A13</key>
 		<dict>
 			<key>xpos</key>
-			<real>845</real>
+			<real>830</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>120</real>
 		</dict>
 		<key>65818E73-C9F5-437E-A7D3-372098CD9F9C</key>
 		<dict>
 			<key>note</key>
 			<string>List installed in default keyword search</string>
 			<key>xpos</key>
-			<real>90</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>375</real>
+		</dict>
+		<key>752B85EC-2CBC-489D-80EB-ED8FF0EAD07A</key>
+		<dict>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>720</real>
 		</dict>
 		<key>765A9E5E-3DE6-4CEB-A708-ED1E1C621785</key>
 		<dict>
 			<key>xpos</key>
-			<real>90</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>535</real>
 		</dict>
 		<key>7EF7399D-3A22-4E7D-A550-F908DA2232BD</key>
 		<dict>
 			<key>xpos</key>
-			<real>660</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>275</real>
 		</dict>
 		<key>7FE62E07-46EC-411E-83CC-B86FA6642445</key>
 		<dict>
 			<key>xpos</key>
-			<real>410</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>470</real>
 		</dict>
 		<key>9AA7C218-0848-4D2A-9205-C33B027F6AA6</key>
 		<dict>
 			<key>xpos</key>
-			<real>955</real>
+			<real>940</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>275</real>
 		</dict>
 		<key>BC8D8EF2-1DF2-4475-A32C-CC1F36BB83DC</key>
 		<dict>
 			<key>note</key>
 			<string>Default search will show all casks and formulae</string>
 			<key>xpos</key>
-			<real>90</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>95</real>
+			<real>105</real>
 		</dict>
 		<key>BD2C7C03-8158-4EFC-926D-0F0C6680FCAA</key>
 		<dict>
 			<key>note</key>
 			<string>List outdated in default keyword search</string>
 			<key>xpos</key>
-			<real>660</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>400</real>
 		</dict>
 		<key>D2D20215-A3B4-48D9-B7AE-B27D69B1DA8F</key>
 		<dict>
 			<key>xpos</key>
-			<real>410</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>240</real>
 		</dict>
 		<key>D9940D7F-26F6-4863-B794-A8DFE5085CB1</key>
 		<dict>
 			<key>xpos</key>
-			<real>90</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>255</real>
 		</dict>
 		<key>E8726093-9079-4DB6-A6F9-F548C8E12FCD</key>
 		<dict>
 			<key>note</key>
 			<string>`Enter` 'Back to Search', else run commands</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>125</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1148,7 +1215,7 @@ A more detailed README with figures can be found on [GitHub](https://github.com/
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.3</string>
+	<string>1.4</string>
 	<key>webaddress</key>
 	<string>github.com/yinan-c/alfred-homebrew</string>
 </dict>
