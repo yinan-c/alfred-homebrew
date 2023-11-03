@@ -12,11 +12,16 @@ It is an Alfred workflow for you to easy brew on Alfred -- Search, get details a
 
 ## Usage
 
+### List and quick install/uninstall
 - Simply type `brew` to show and search for all formulae and casks
-  - by default, casks will be listed first, you can add 'cask' or 'formula' to your query (before or after) to further filter results (for example `brew vim formula` or `brew formula vim` will filter out casks results and only list formula.
+  - By default, casks will be listed first, you can add 'cask' or 'formula' to your query (before or after) to further filter results (for example `brew vim formula` or `brew formula vim` will filter out casks results and only list formula.
+  - Select any casks/formula, directly install by `command + enter`.
+  - In the dropdown list at the end, there will be an "outdated" list, where you can `enter` to update. There will be an "installed" list, where you can quickly uninstall by `command + enter`(clean uninstall) or `option + enter`
   - Quicklook information page on brew.sh by pressing `command + Y` on selected entries.
 
 ![](https://i.imgur.com/ucsFm1l.png)
+
+### Reveal details and run commands
 
 - Continue to **type the full name** or **tab-complete** the selected items (if enabled in Alfred) to show details of information (Analytics, install status and newest versions, urls ...) and commands, commands include install, uninstall, upgrade, show info ... Commands will depend on install status. 
 - Alternatively, in the dropdown list, select any items and press `enter` to see more details and applicable commands.
@@ -26,9 +31,12 @@ It is an Alfred workflow for you to easy brew on Alfred -- Search, get details a
 
 ![](https://i.imgur.com/NjZ3EgR.png)
 
+### Other lists: installed, outdated, leaves
+
 - View lists of homebrew leaves, installed formulae and casks, and outdated ones by typing keywords `leaves`, `list` and `outdated`.
   - I also added the default search_keyword `brew` to show installed and outdated lists, so that you can see whether a package is installed, or outdated. 
   - In the outdated list, you can update one-by-one or all-at-once with a simple `enter`.
+  - In `leaves` and `list`, directly uninstall by `command + enter`(clean uninstall) or `option + enter`
   - In `leaves` and `list`, tab-complete to view info and `enter` to view/run commands as you do with default `brew` search.
   - In `leaves`, quicklook is also available.
 
